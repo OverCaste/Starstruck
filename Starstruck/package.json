@@ -1,0 +1,12 @@
+{
+	"name": "sdlgame",
+	"targetPath": "bin",
+	"targetName": "SDLGame",
+	"description": "A simple game based on Lost Vikings by Blizzard Entertainment.",
+	"copyright": "Copyright © 2014, OverCaste",
+	"authors": ["OverCaste"],
+	"dependencies": {
+	      "derelict-gl3" : "~master",
+  	      "derelict-sdl2" : "~master"
+	}
+}
