@@ -1,7 +1,7 @@
 {
-	"name": "sdlgame",
+	"name": "starstruck",
 	"targetPath": "bin",
-	"targetName": "SDLGame",
+	"targetName": "Starstruck",
 	"description": "A simple game based on Lost Vikings by Blizzard Entertainment.",
 	"copyright": "Copyright © 2014, OverCaste",
 	"authors": ["OverCaste"],

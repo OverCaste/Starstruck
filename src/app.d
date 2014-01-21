@@ -16,6 +16,7 @@ public enum SCREEN_WIDTH = 640;
 public enum SCREEN_HEIGHT = 480;
 public enum SCREEN_ASPECT = to!double(SCREEN_WIDTH)/to!double(SCREEN_HEIGHT);
 
+public ulong gameClock = 0;
 
 void init( ) {
 	DerelictSDL2.load("lib/SDL2.dll, SDL2.dll");
@@ -23,7 +24,7 @@ void init( ) {
 		throw new Exception("SDL Failed to initialize!");
 	}
 	//The window we'll be rendering 
-	window = SDL_CreateWindow("Test", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Starstruck", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if(window == null) {
 	    throw new Exception("Window could not be created! SDL_Error: " ~ to!string(SDL_GetError()));
 	}
@@ -74,6 +75,8 @@ void mainLoop( ) {
 		handleInput( );
 		physics( );
 		render( );
+		updateKeyboard( );
+		gameClock++;
 		SDL_Delay(15);
 	}
 	stop( );

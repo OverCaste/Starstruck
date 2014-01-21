@@ -56,6 +56,10 @@ public class Entity {
 		return dead;
 	}
 	
+	public SDL_Surface* getScreenSurface( ) {
+		return screenSurface;
+	}
+	
 	public void doPhysics( ) {
 	}
 	

@@ -2,8 +2,12 @@ module entity.ship;
 
 import entity.entity;
 import entity.projectile;
-import entity.plasmabolt;
+import weapon.weapon;
+import weapon.plasmabolt;
+import weapon.photontorpedo;
+import app;
 import std.conv;
+import std.datetime;
 import derelict.sdl2.sdl;
 import keyboard;
 import entitymanager;
@@ -15,6 +19,13 @@ public class Ship : Entity {
 		
 		double speed = 3.0;
 		SDL_Surface* surface;
+		
+		ulong weaponLastFired = 0;
+		//Weapon weapon = new PlasmaBolt();
+		
+		//TODO remove
+		uint weaponId = 1;
+		Weapon[] weapons = [new PlasmaBolt(), new PhotonTorpedo()];
 	}
 	public this(SDL_Surface* screenSurface) {
 		super(0, 0, new SDL_Rect(0, 0, 64, 64), screenSurface);
@@ -25,6 +36,14 @@ public class Ship : Entity {
 	
 	public ~this( ) {
 		SDL_FreeSurface(surface);
+	}
+	
+	private void fireWeapon( ) {
+		Weapon weapon = weapons[weaponId];
+		if(weaponLastFired == 0 || gameClock - weaponLastFired > weapon.getCooldown()) { //Cooldown
+			weapon.fire(this);
+			weaponLastFired = gameClock;
+		}
 	}
 	
 	public override void doPhysics( ) {
@@ -40,9 +59,11 @@ public class Ship : Entity {
 		if(isKeyDown(SDLK_RIGHT)) {
 			setX(x + speed);
 		}
+		if(wasKeyPressed(SDLK_a)) { //Debug, cycle through available weapons
+			weaponId = (weaponId+1) % weapons.length;
+		}
 		if(isKeyDown(SDLK_SPACE)) {
-			Projectile bullet = new PlasmaBolt(screenSurface);
-			addEntity(bullet, to!int((getX()+getWidth()/2) - bullet.getWidth()/2), to!int(y-2));
+			fireWeapon();
 		}
 	}
 	
