@@ -3,7 +3,6 @@ module entity.plasmabolt;
 import entity.entity;
 import entity.projectile;
 import derelict.sdl2.sdl;
-import keyboard;
 
 public class PlasmaBolt : Projectile {
 	private {

@@ -5,6 +5,7 @@ import entity.projectile;
 import weapon.weapon;
 import weapon.plasmabolt;
 import weapon.photontorpedo;
+import weapon.xenonray;
 import app;
 import std.conv;
 import std.datetime;
@@ -24,8 +25,8 @@ public class Ship : Entity {
 		//Weapon weapon = new PlasmaBolt();
 		
 		//TODO remove
-		uint weaponId = 1;
-		Weapon[] weapons = [new PlasmaBolt(), new PhotonTorpedo()];
+		uint weaponId = 0;
+		Weapon[] weapons = [new PlasmaBolt(), new PhotonTorpedo(), new XenonRay()];
 	}
 	public this(SDL_Surface* screenSurface) {
 		super(0, 0, new SDL_Rect(0, 0, 64, 64), screenSurface);
@@ -59,7 +60,7 @@ public class Ship : Entity {
 		if(isKeyDown(SDLK_RIGHT)) {
 			setX(x + speed);
 		}
-		if(wasKeyPressed(SDLK_a)) { //Debug, cycle through available weapons
+		if(wasKeyPressed(SDLK_w)) { //Debug, cycle through available weapons
 			weaponId = (weaponId+1) % weapons.length;
 		}
 		if(isKeyDown(SDLK_SPACE)) {
